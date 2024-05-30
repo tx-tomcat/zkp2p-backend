@@ -8,9 +8,14 @@ export class RampService {
 
   async addToQueue(eml: string | Buffer, orderId: string) {
     console.log(orderId);
-    await this.proofQueue.add({
-      eml,
-      orderId,
-    });
+    await this.proofQueue.add(
+      {
+        eml,
+        orderId,
+      },
+      {
+        removeOnComplete: true,
+      },
+    );
   }
 }
