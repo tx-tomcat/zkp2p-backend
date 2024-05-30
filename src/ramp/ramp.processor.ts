@@ -4,7 +4,6 @@ import {
   ADMIN_CAP,
   client,
   generate_input,
-  jsonToHexString,
   PUBLISHED_AT,
   ZKRAMP_ID,
 } from 'src/utils/generate-input';
