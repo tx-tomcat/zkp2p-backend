@@ -54,10 +54,6 @@ export class ProofVerifyConsumer {
         ) {
           console.log('Verified');
 
-          await pusher.trigger('p2p', 'message', {
-            message: 'Deal closed with success',
-            status: true,
-          });
           const txb = new Transaction();
           const adminKeypair = Ed25519Keypair.deriveKeypair(
             process.env.SEED_PHRASE,
@@ -78,6 +74,10 @@ export class ProofVerifyConsumer {
           const res = await client.signAndExecuteTransaction({
             transaction: bytes,
             signer: adminKeypair,
+          });
+          await pusher.trigger('p2p', 'message', {
+            message: 'Deal closed with success',
+            status: true,
           });
           console.log(res);
         }
