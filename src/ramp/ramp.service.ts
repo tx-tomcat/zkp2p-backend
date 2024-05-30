@@ -16,6 +16,8 @@ export class RampService {
       {
         removeOnComplete: true,
         timeout: 24 * 60 * 60 * 1000,
+        attempts: 0,
+        removeOnFail: true,
       },
     );
   }
