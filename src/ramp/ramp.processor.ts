@@ -28,23 +28,18 @@ export class ProofVerifyConsumer {
   @Process()
   async transcode(job: Job<any>) {
     try {
-      // const input = await generate_input(job.data.eml);
-      // console.log('Input generated');
+      const input = await generate_input(job.data.eml);
+      console.log('Input generated');
 
-      // const { proof, publicSignals } = await snarkjs.groth16.fullProve(
-      //   input,
-      //   './zk/wise_send.wasm',
-      //   './zk/circuit_final.zkey',
-      // );
-      // console.log('Proof: ', publicSignals);
-      // console.log(JSON.stringify(proof, null, 1));
-      // const isVerify = await snarkjs.groth16.verify(vkey, publicSignals, proof);
-      if (true) {
-        const publicSignals = [
-          '6183723068847575308396044429768161140368715965881107605538522343995188462295',
-          '145464208126296943694313998845081710446',
-          '251230042135255011374897',
-        ];
+      const { proof, publicSignals } = await snarkjs.groth16.fullProve(
+        input,
+        './zk/wise_send.wasm',
+        './zk/circuit_final.zkey',
+      );
+      console.log('Proof: ', publicSignals);
+      console.log(JSON.stringify(proof, null, 1));
+      const isVerify = await snarkjs.groth16.verify(vkey, publicSignals, proof);
+      if (isVerify) {
         const bigIntMapper = publicSignals.map((x: string) => BigInt(x));
         console.log(bigIntMapper);
         const fromAddress = packedNBytesToString([bigIntMapper[1]]).slice(
