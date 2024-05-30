@@ -27,6 +27,7 @@ export class ProofVerifyConsumer {
   @Process()
   async transcode(job: Job<any>) {
     try {
+      console.log('Job started', job.id);
       const input = await generate_input(job.data.eml);
       console.log('Input generated');
 
